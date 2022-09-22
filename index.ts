@@ -114,3 +114,68 @@ let 학교: { score: (number | boolean)[]; teacher: string; friend: string | str
 };
 학교.score[4] = false;
 학교.friend = ['Hyun', 학교.teacher];
+
+/* ************************************************************** */
+
+function 나아기함수(x: number): number {
+	return x * 2;
+}
+
+나아기함수(3);
+
+function 나는보이드(x: number): void {
+	console.log(x);
+	// return 1; // 보이드는 반환값있으면 에러남 (실수로 뭔가를 리턴하는걸 막을 수 있음)
+}
+
+// 나는보이드(); // JS랑 다르게 파라미터없으면 에러남
+나는보이드(2);
+
+function 나는옵셔널(x?: number): void {
+	console.log(x); // 파라미터없으면 undefined
+}
+
+나는옵셔널(); // 파라미터는 옵션
+
+// 변수?:number === 변수:number|undefined
+
+function 왜에러일까(x: number | string): void {
+	// console.log(x + 3); // 유니온타입은 연산불가
+}
+
+왜에러일까(2);
+
+function 내로잉해주기(x: number | string): void {
+	if (typeof x === 'number') console.log(x + 3);
+}
+
+내로잉해주기(2);
+
+// 문제1. 이름을 파라미터로 입력하면 콘솔창에 `안녕하세요 ${이름}` 출력, 파라미터 없으면 '이름이 없습니다' 출력
+function 문제1(name?: string): void {
+	// undefined는 falsy임
+	if (name) console.log(`안녕하세요 ${name}님!`);
+	else console.log('이름이 없습니다.');
+}
+
+문제1('초코');
+
+// 문제2. 함수에 숫자 또는 문자를 집어넣으면 자릿수를 세어 출력해주는 함수
+function 문제2(x: number | string): number {
+	if (typeof x === 'number') return (x + '').length;
+	else return x.length;
+	// return x.toString().length;
+}
+
+console.log(문제2(123));
+console.log(문제2('다섯글자임'));
+
+// 문제3. 결혼 가능 확률
+function 문제3(월소득: number, 집보유여부: boolean, 매력점수: string): string | void {
+	if (월소득 < 0) return '월소득이 왜 마이너스임';
+	const 점수 = 월소득 * 1 + (집보유여부 ? 500 : 0) + (매력점수 === '상' ? 100 : 0);
+	if (점수 >= 600) return '결혼가능';
+}
+
+console.log(문제3(700, false, '중'));
+console.log(문제3(-100, false, '상'));

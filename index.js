@@ -69,3 +69,47 @@ var 학교 = {
 };
 학교.score[4] = false;
 학교.friend = ['Hyun', 학교.teacher];
+function 나아기함수(x) {
+    return x * 2;
+}
+나아기함수(3);
+function 나는보이드(x) {
+    console.log(x);
+}
+나는보이드(2);
+function 나는옵셔널(x) {
+    console.log(x);
+}
+나는옵셔널();
+function 왜에러일까(x) {
+}
+왜에러일까(2);
+function 내로잉해주기(x) {
+    if (typeof x === 'number')
+        console.log(x + 3);
+}
+내로잉해주기(2);
+function 문제1(name) {
+    if (name)
+        console.log("\uC548\uB155\uD558\uC138\uC694 ".concat(name, "\uB2D8!"));
+    else
+        console.log('이름이 없습니다.');
+}
+문제1('초코');
+function 문제2(x) {
+    if (typeof x === 'number')
+        return (x + '').length;
+    else
+        return x.length;
+}
+console.log(문제2(123));
+console.log(문제2('다섯글자임'));
+function 문제3(월소득, 집보유여부, 매력점수) {
+    if (월소득 < 0)
+        return '월소득이 왜 마이너스임';
+    var 점수 = 월소득 * 1 + (집보유여부 ? 500 : 0) + (매력점수 === '상' ? 100 : 0);
+    if (점수 >= 600)
+        return '결혼가능';
+}
+console.log(문제3(700, false, '중'));
+console.log(문제3(-100, false, '상'));
