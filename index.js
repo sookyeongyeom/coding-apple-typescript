@@ -1,66 +1,65 @@
 "use strict";
-var 이름 = 'choco';
-var 배열 = ['gom', 'ponyo'];
-var 오브젝트 = { name: 'choco' };
-var 초코 = [123, true];
-var 함수 = function (x) {
+let 이름 = 'choco';
+let 배열 = ['gom', 'ponyo'];
+let 오브젝트 = { name: 'choco' };
+let 초코 = [123, true];
+const 함수 = (x) => {
     return x * 2;
 };
-var User = (function () {
-    function User(name) {
+class User {
+    constructor(name) {
         this.name = 'choco';
     }
-    return User;
-}());
-var 이름2 = 'choco';
-var 나이2 = 50;
-var 결혼했니 = false;
-var 널 = null;
-var 정의안함 = undefined;
-var 회원들 = ['yeom', 'park'];
-var 회원정보 = { member1: 'yeom', member2: 'park' };
-var 타입지정자동으로해주나요 = true;
-var 나는숫자배열이다 = [1, 2, 3];
-var 나중에지정도가능;
+}
+let 이름2 = 'choco';
+let 나이2 = 50;
+let 결혼했니 = false;
+let 널 = null;
+let 정의안함 = undefined;
+let 회원들 = ['yeom', 'park'];
+let 회원정보 = { member1: 'yeom', member2: 'park' };
+let 타입지정자동으로해주나요 = true;
+let 나는숫자배열이다 = [1, 2, 3];
+let 나중에지정도가능;
 나중에지정도가능 = 1;
 나중에지정도가능 = [1, 2, 3];
-var 내이름 = '수경';
-var 내나이 = 25;
-var 내출생지역 = '안양';
-var 내18번 = {
+let 내이름 = '수경';
+let 내나이 = 25;
+let 내출생지역 = '안양';
+let 내18번 = {
     song: '운이좋았지',
     singer: '권진아',
 };
-var project = {
+let project = {
     member: ['yeom', 'park'],
     days: 30,
     started: true,
 };
-var 유니온타입 = 123;
+let 유니온타입 = 123;
 유니온타입 = '스트링가능';
-var 유니온배열 = [1, 2, 3];
+let 유니온배열 = [1, 2, 3];
 유니온배열 = ['가', '나', 1];
-var 유니온오브젝트 = { a: 123 };
+let 유니온오브젝트 = { a: 123 };
 유니온오브젝트 = { a: '가나다' };
-var 애니;
+let 애니;
 애니 = 123;
 애니 = [];
-var 언노운;
+let 언노운;
 언노운 = 123;
 언노운 = {};
-var 애니때문에실드죽음 = 애니;
+let 애니때문에실드죽음 = 애니;
 애니 - 1;
-var 문제없음 = '0';
+let 문제없음 = '0';
 문제없음 + 1;
-var 문제있음;
-var 이러면문제없음 = 0;
+let 문제있음;
+let 이러면문제없음 = 0;
 이러면문제없음 + 1;
-var 언노운은연산불가 = 1;
-var user = 'yeom';
-var age = undefined;
-var married = false;
-var 나 = [user, age, married];
-var 학교 = {
+let 언노운은연산불가 = 1;
+let user = 'yeom';
+let age = undefined;
+let married = false;
+let 나 = [user, age, married];
+let 학교 = {
     score: [100, 97, 84],
     teacher: 'Sam',
     friend: 'Yoon',
@@ -89,7 +88,7 @@ function 내로잉해주기(x) {
 내로잉해주기(2);
 function 문제1(name) {
     if (name)
-        console.log("\uC548\uB155\uD558\uC138\uC694 ".concat(name, "\uB2D8!"));
+        console.log(`안녕하세요 ${name}님!`);
     else
         console.log('이름이 없습니다.');
 }
@@ -105,7 +104,7 @@ console.log(문제2('다섯글자임'));
 function 문제3(월소득, 집보유여부, 매력점수) {
     if (월소득 < 0)
         return '월소득이 왜 마이너스임';
-    var 점수 = 월소득 * 1 + (집보유여부 ? 500 : 0) + (매력점수 === '상' ? 100 : 0);
+    const 점수 = 월소득 * 1 + (집보유여부 ? 500 : 0) + (매력점수 === '상' ? 100 : 0);
     if (점수 >= 600)
         return '결혼가능';
 }
@@ -119,26 +118,26 @@ function 유니온타입다룰땐내로잉(x) {
 }
 유니온타입다룰땐내로잉(123);
 function 배열요소내로잉(x) {
-    var array = [];
+    let array = [];
     if (typeof x === 'number')
         array[0] = x;
 }
 배열요소내로잉(123);
 function 어설션(x) {
-    var array = [];
+    let array = [];
     array[0] = x;
 }
 function cleaning(dirty) {
-    var clean = [];
-    dirty.map(function (v, i) {
+    let clean = [];
+    dirty.map((v, i) => {
         clean.push(Number(v));
     });
     return clean;
 }
 console.log(cleaning(['1', 2, '3']));
-var 철수쌤 = { subject: 'math' };
-var 영희쌤 = { subject: ['science', 'english'] };
-var 민수쌤 = { subject: ['science', 'art', 'korean'] };
+let 철수쌤 = { subject: 'math' };
+let 영희쌤 = { subject: ['science', 'english'] };
+let 민수쌤 = { subject: ['science', 'art', 'korean'] };
 function 마지막과목(teacher) {
     if (typeof teacher.subject == 'string')
         return teacher.subject;
@@ -150,22 +149,22 @@ function 마지막과목(teacher) {
 console.log(마지막과목(철수쌤));
 console.log(마지막과목(영희쌤));
 console.log(마지막과목(민수쌤));
-var 동물 = 'kitten';
+let 동물 = 'kitten';
 동물 = 123;
-var 고양이 = { name: '정아', age: 4 };
-var 출생지역 = { region: 'seoul' };
+let 고양이 = { name: '정아', age: 4 };
+const 출생지역 = { region: 'seoul' };
 출생지역.region = 'busan';
-var 단짝 = {
+const 단짝 = {
     name: '토심',
 };
 단짝.name = '토뭉';
-var 베프 = {
+const 베프 = {
     name: '토심',
 };
-var position = { x: 10, y: 20 };
-var teen = { name: '정아', phone: 2222, email: 'jeongah@kitty.com', isTeen: true };
-var 리터럴;
-var 접니다;
+let position = { x: 10, y: 20 };
+let teen = { name: '정아', phone: 2222, email: 'jeongah@kitty.com', isTeen: true };
+let 리터럴;
+let 접니다;
 접니다 = '초코';
 접니다 = '곰';
 function 리터럴파라미터(a) {
@@ -176,21 +175,21 @@ function 가위바위보(x) {
     return ['가위'];
 }
 가위바위보('가위');
-var 자료 = {
+let 자료 = {
     name: 'choco',
 };
 자료.name;
 function 내함수(a) { }
 내함수('choco');
-var 함수타입부착 = function (a) {
+let 함수타입부착 = function (a) {
     return 1;
 };
-var 회원정보임 = {
+let 회원정보임 = {
     name: 'choco',
-    plusOne: function (a) {
+    plusOne(a) {
         return a;
     },
-    changeName: function () { },
+    changeName: () => { },
 };
 회원정보임.plusOne(1);
 회원정보임.changeName();
@@ -199,15 +198,45 @@ function 메인함수(a) {
 }
 function 콜백함수() { }
 메인함수(콜백함수);
-var cutZero = function (a) {
+let cutZero = (a) => {
     return a[0] === '0' ? a.slice(1) : a;
 };
 console.log(cutZero('012345'));
-var removeDash = function (a) {
+let removeDash = (a) => {
     return Number(a.replace(/-/g, ''));
 };
 console.log(removeDash('010-1111-2222'));
-var mainFunc = function (a, b, c) {
+let mainFunc = (a, b, c) => {
     return c(b(a));
 };
 console.log(mainFunc('010-3333-5555', cutZero, removeDash));
+let 제목 = document.querySelector('#title');
+if (제목 != null)
+    제목.innerHTML = '반가워요';
+if (제목 instanceof Element)
+    제목.innerHTML = '반가워요';
+let 버튼 = document.querySelector('#button');
+if (제목 === null || 제목 === void 0 ? void 0 : 제목.innerHTML)
+    제목.innerHTML = '반가워요';
+let 링크 = document.querySelector('.link');
+if (링크 instanceof HTMLAnchorElement)
+    링크.href = 'https://kakao.com';
+let 버튼2 = document.querySelector('#button');
+버튼2 === null || 버튼2 === void 0 ? void 0 : 버튼2.addEventListener('click', () => {
+    console.log('hi!');
+});
+let 이미지 = document.getElementById('image');
+버튼2 === null || 버튼2 === void 0 ? void 0 : 버튼2.addEventListener('click', () => {
+    if (이미지 instanceof HTMLImageElement)
+        이미지.src = 'https://src.hidoc.co.kr/image/lib/2022/5/4/1651651323632_0.jpg';
+});
+let 링크들 = document.getElementsByClassName('link');
+Array.from(링크들).map((v, i) => {
+    if (v instanceof HTMLAnchorElement)
+        v.href = 'https://github.com';
+});
+let 링크들2 = document.querySelectorAll('.link');
+링크들2.forEach((v) => {
+    if (v instanceof HTMLAnchorElement)
+        v.href = 'https://learnus.org';
+});

@@ -429,3 +429,44 @@ let mainFunc: MainFunc = (a, b, c) => {
 	return c(b(a));
 };
 console.log(mainFunc('010-3333-5555', cutZero, removeDash));
+
+/* ************************************************************** */
+
+// HTML 조작
+// Element | null 유니온타입이기 때문에 내로잉 필수
+let 제목 = document.querySelector('#title');
+
+// 내로잉 5가지 방법
+if (제목 != null) 제목.innerHTML = '반가워요';
+if (제목 instanceof Element) 제목.innerHTML = '반가워요'; // 가장 많이 쓰게될 것
+let 버튼 = document.querySelector('#button') as Element; // 비상시
+if (제목?.innerHTML) 제목.innerHTML = '반가워요'; // 옵셔널체이닝 (있으면 엘리먼트, 없으면 undefined)
+// 마지막 방법 = strict모드 걍 끄기 ㅋㅋ
+
+// 세부 속성은 세부 스코프로 내로잉해줘야함
+let 링크 = document.querySelector('.link');
+if (링크 instanceof HTMLAnchorElement) 링크.href = 'https://kakao.com';
+
+let 버튼2 = document.querySelector('#button');
+버튼2?.addEventListener('click', () => {
+	console.log('hi!');
+});
+
+// 문제1. 버튼을 누르면 이미지 바꾸기
+let 이미지 = document.getElementById('image');
+버튼2?.addEventListener('click', () => {
+	if (이미지 instanceof HTMLImageElement)
+		이미지.src = 'https://src.hidoc.co.kr/image/lib/2022/5/4/1651651323632_0.jpg';
+});
+
+// 문제2. 바꾸고 싶은 HTML요소가 많은 경우
+let 링크들 = document.getElementsByClassName('link');
+Array.from(링크들).map((v, i) => {
+	if (v instanceof HTMLAnchorElement) v.href = 'https://github.com';
+});
+
+// 이렇게도 가능
+let 링크들2 = document.querySelectorAll('.link');
+링크들2.forEach((v) => {
+	if (v instanceof HTMLAnchorElement) v.href = 'https://learnus.org';
+});
