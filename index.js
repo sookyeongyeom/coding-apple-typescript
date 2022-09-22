@@ -150,3 +150,17 @@ function 마지막과목(teacher) {
 console.log(마지막과목(철수쌤));
 console.log(마지막과목(영희쌤));
 console.log(마지막과목(민수쌤));
+var 동물 = 'kitten';
+동물 = 123;
+var 고양이 = { name: '정아', age: 4 };
+var 출생지역 = { region: 'seoul' };
+출생지역.region = 'busan';
+var 단짝 = {
+    name: '토심',
+};
+단짝.name = '토뭉';
+var 베프 = {
+    name: '토심',
+};
+var position = { x: 10, y: 20 };
+var teen = { name: '정아', phone: 2222, email: 'jeongah@kitty.com', isTeen: true };

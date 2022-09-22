@@ -251,3 +251,78 @@ console.log(마지막과목(민수쌤));
 
 // 배열인지 확인할때는 typeof 못씀 (프리미티브 아니기때문)
 // 대신 Array.isArray() 사용해야함
+
+/* ************************************************************** */
+
+// type-alias = 타입별칭 (영어대문자로 시작)
+type Animal = string | number | undefined;
+let 동물: Animal = 'kitten';
+동물 = 123;
+
+// 오브젝트 타입
+type AnimalObj = { name: string; age: number };
+let 고양이: AnimalObj = { name: '정아', age: 4 };
+
+// const 잠시 설명
+// const로 선언한 오브젝트의 자료변경은 가능하다
+// const는 재할당을 금지해주는 키워드이지, 안에 있는 자료의 수정을 막는 키워드는 아니기 때문임
+const 출생지역 = { region: 'seoul' };
+출생지역.region = 'busan';
+
+// 타입스크립트로는 오브젝트 자료수정도 막을 수 있음
+const 단짝 = {
+	name: '토심',
+};
+단짝.name = '토뭉';
+
+type BestFriend = {
+	readonly name: string; // 읽기전용 = 실수로 수정하면 에러남
+	age?: number; // 오브젝트 속성안에도 ? 사용가능 (number | undefined)
+};
+const 베프: BestFriend = {
+	name: '토심',
+};
+// 베프.name = '토뭉'; // 에러남
+
+// ***타입스크립트 에러는 에디터 & 터미널에서만 존재함***
+// 실제 변환된 자바스크립트 파일은 에러없음
+
+// 정의한 타입은 일반 타입처럼 다른 타압의 정의에 사용가능하다
+type Name = string;
+type Age = number;
+type Person = Name | Age;
+
+type PositionX = { x: number };
+type PositionY = { y: number };
+type Position = PositionX & PositionY; // & 기호로 오브젝트 속성 합쳐줄 수 있음 = extend
+let position: Position = { x: 10, y: 20 };
+
+// ***같은 이름의 type 재정의 불가능***
+
+// 문제1. 오브젝트 타입을 정의한 type-alias 두개를 &로 합칠 때 중복된 속성이 있으면 어떻게 될까?
+// 예상. 나중걸로 적용될 듯
+type A = { name: string; phone: string };
+type B = { phone: number; address: string };
+type C = A & B;
+// 결과. 둘 다 에러남 = never 타입이 되어버림 ㄷㄷ
+// let c: C = { name: '모찌', phone: '1111', address: '자이' };
+// let c2: C = { name: '모찌', phone: 1111, address: '자이' };
+
+// 문제2. 주어진 조건을 만족하는 타입 만들기
+type Condition = {
+	color?: string;
+	size: number;
+	readonly position: number[];
+};
+
+// 문제3. 주어진 조건을 만족하는 타입 만들기
+type Info = {
+	name: string;
+	phone: number;
+	email: string;
+};
+
+// 문제4. 주어진 조건을 만족하는 타입 만들기
+type Teen = { isTeen: boolean };
+type Info2 = Info & Teen;
+let teen: Info2 = { name: '정아', phone: 2222, email: 'jeongah@kitty.com', isTeen: true };
