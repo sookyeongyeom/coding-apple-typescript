@@ -240,3 +240,14 @@ let 링크들2 = document.querySelectorAll('.link');
     if (v instanceof HTMLAnchorElement)
         v.href = 'https://learnus.org';
 });
+class Hero {
+    constructor(구멍) {
+        this.q = 구멍;
+        this.w = 'snowball';
+    }
+}
+let 누누 = new Hero('consume');
+console.log(누누);
+let 어레이 = [4, 2, 1];
+let 어레이2 = new Array(4, 2, 1);
+Array.prototype.함수 = ㄹ;

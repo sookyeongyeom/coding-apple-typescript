@@ -470,3 +470,39 @@ let 링크들2 = document.querySelectorAll('.link');
 링크들2.forEach((v) => {
 	if (v instanceof HTMLAnchorElement) v.href = 'https://learnus.org';
 });
+
+/* ************************************************************** */
+
+// class 설명
+
+// 오브젝트 찍어내는 기계
+// function 기계(구멍) {
+// 	this.q = 구멍;
+// 	this.w = 'snowball';
+// }
+// let 누누 = new 기계('consume');
+// let 가렌 = new 기계('strike');
+
+// ES6 신문법 클래스
+class Hero {
+	q;
+	w;
+	constructor(구멍: string) {
+		this.q = 구멍;
+		this.w = 'snowball';
+	}
+}
+let 누누 = new Hero('consume');
+console.log(누누);
+
+// prototype = 유전자
+// Hero.prototype.secret = '쨘'; // 유전자 조작
+
+// prototype에 기록을 해놓으면 자식들도 갖다쓸수있음
+// prototype chaining
+
+let 어레이 = [4, 2, 1]; // 인간의 방식
+let 어레이2 = new Array(4, 2, 1); // 컴퓨터의 방식
+
+// Q. 모든 array 자료에서 쓸 수 있는 함수 추가도 가능
+// Array.prototype.함수 = function () {};
