@@ -36,3 +36,36 @@ var project = {
     days: 30,
     started: true,
 };
+var 유니온타입 = 123;
+유니온타입 = '스트링가능';
+var 유니온배열 = [1, 2, 3];
+var 이렇게도됨 = [1, 2, 3];
+유니온배열 = ['가', '나', '다'];
+이렇게도됨 = ['가', '나', '다'];
+var 유니온오브젝트 = { a: 123 };
+유니온오브젝트 = { a: '가나다' };
+var 애니;
+애니 = 123;
+애니 = [];
+var 언노운;
+언노운 = 123;
+언노운 = {};
+var 애니때문에실드죽음 = 애니;
+애니 - 1;
+var 문제없음 = '0';
+문제없음 + 1;
+var 문제있음;
+var 이러면문제없음 = 0;
+이러면문제없음 + 1;
+var 언노운은연산불가 = 1;
+var user = 'yeom';
+var age = undefined;
+var married = false;
+var 나 = [user, age, married];
+var 학교 = {
+    score: [100, 97, 84],
+    teacher: 'Sam',
+    friend: 'Yoon',
+};
+학교.score[4] = false;
+학교.friend = ['Hyun', 학교.teacher];
