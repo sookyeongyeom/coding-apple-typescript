@@ -182,3 +182,32 @@ var 자료 = {
 자료.name;
 function 내함수(a) { }
 내함수('choco');
+var 함수타입부착 = function (a) {
+    return 1;
+};
+var 회원정보임 = {
+    name: 'choco',
+    plusOne: function (a) {
+        return a;
+    },
+    changeName: function () { },
+};
+회원정보임.plusOne(1);
+회원정보임.changeName();
+function 메인함수(a) {
+    a();
+}
+function 콜백함수() { }
+메인함수(콜백함수);
+var cutZero = function (a) {
+    return a[0] === '0' ? a.slice(1) : a;
+};
+console.log(cutZero('012345'));
+var removeDash = function (a) {
+    return Number(a.replace(/-/g, ''));
+};
+console.log(removeDash('010-1111-2222'));
+var mainFunc = function (a, b, c) {
+    return c(b(a));
+};
+console.log(mainFunc('010-3333-5555', cutZero, removeDash));

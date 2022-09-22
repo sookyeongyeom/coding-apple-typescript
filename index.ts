@@ -368,3 +368,64 @@ let 자료 = {
 function 내함수(a: 'choco') {}
 내함수('choco');
 // 내함수(자료.name); // as const 안붙여주면 타입이 string이라서 에러남 ㄷ
+
+/* ************************************************************** */
+
+// 함수타입 지정
+type 함수타입 = (a: string) => number;
+
+// 함수표현식에만 type-alias 사용가능
+let 함수타입부착: 함수타입 = function (a) {
+	return 1;
+};
+
+// 오브젝트안에 함수 만들 수 있음
+let 회원정보임 = {
+	name: 'choco',
+	// 파라미터가 있는데 타입지정안하면 혼남
+	plusOne(a: number): number {
+		return a;
+	},
+	// 이렇게 해도 됨
+	changeName: (): void => {},
+};
+회원정보임.plusOne(1);
+회원정보임.changeName();
+
+// 문제1. 타입에 함수넣기는 이렇게
+type 회원정보타입 = {
+	name: string;
+	age: number;
+	plusOne: (x: number) => number;
+	changeName: () => void;
+};
+
+// 콜백함수 설명
+function 메인함수(a: Function) {
+	a();
+}
+function 콜백함수() {}
+메인함수(콜백함수);
+
+// 문제2. 함수 2개 만들기
+type CutZero = (a: string) => string;
+type RemoveDash = (a: string) => number;
+
+let cutZero: CutZero = (a) => {
+	return a[0] === '0' ? a.slice(1) : a;
+	// return a.replace(/^0+/, '');
+};
+console.log(cutZero('012345'));
+
+let removeDash: RemoveDash = (a) => {
+	return Number(a.replace(/-/g, ''));
+};
+console.log(removeDash('010-1111-2222'));
+
+// 문제3. 함수에 함수 집어넣기
+type MainFunc = (a: string, b: CutZero, c: RemoveDash) => number;
+
+let mainFunc: MainFunc = (a, b, c) => {
+	return c(b(a));
+};
+console.log(mainFunc('010-3333-5555', cutZero, removeDash));
