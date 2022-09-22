@@ -326,3 +326,45 @@ type Info = {
 type Teen = { isTeen: boolean };
 type Info2 = Info & Teen;
 let teen: Info2 = { name: '정아', phone: 2222, email: 'jeongah@kitty.com', isTeen: true };
+
+/* ************************************************************** */
+
+// Literal types = 더 엄격한 타입 지정 (사전에 정의한 값만 들어오게)
+// 장점1. 변수에 뭐가 들어올지 더 엄격하게 관리가능
+// 장점2. 자동완성 힌트 굿
+
+let 리터럴: 123; // 이렇게!
+// 리터럴 = 111; // 에러남
+
+let 접니다: '초코' | '곰';
+접니다 = '초코';
+접니다 = '곰';
+// 접니다 = '포뇨'; // 에러남
+
+function 리터럴파라미터(a: 'hello'): 1 | 0 {
+	return 1;
+}
+리터럴파라미터('hello');
+
+// 연습문제1. 리터럴 파라미터 함수 만들기
+// 조건1) 가위, 바위, 보 중 1개 입력가능
+// 조건2) 가위, 바위, 보만 들어올 수 있는 array를 리턴해야함
+function 가위바위보(x: '가위' | '바위' | '보'): ('가위' | '바위' | '보')[] {
+	return ['가위'];
+}
+가위바위보('가위');
+
+// Literal type은 const변수 업글버전임
+
+// 파라미터로 리터럴타입 객체의 value를 넘겼을 때 타입이 primitive가 되는 문제
+// 해결하려면 아래처럼 as const 키워드로 오브젝트를 아예 잠가주는게 편함
+let 자료 = {
+	name: 'choco',
+} as const; // 오브젝트 value값을 그대로 타입으로 지정해줌 + 오브젝트 속성에 모두 readonly붙여줌
+자료.name; // 'choco'
+
+// choco라는 자료만 들어올 수 있습니다 (X)
+// choco라는 타입만 들어올 수 있습니다 (O)
+function 내함수(a: 'choco') {}
+내함수('choco');
+// 내함수(자료.name); // as const 안붙여주면 타입이 string이라서 에러남 ㄷ

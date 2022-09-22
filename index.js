@@ -164,3 +164,21 @@ var 베프 = {
 };
 var position = { x: 10, y: 20 };
 var teen = { name: '정아', phone: 2222, email: 'jeongah@kitty.com', isTeen: true };
+var 리터럴;
+var 접니다;
+접니다 = '초코';
+접니다 = '곰';
+function 리터럴파라미터(a) {
+    return 1;
+}
+리터럴파라미터('hello');
+function 가위바위보(x) {
+    return ['가위'];
+}
+가위바위보('가위');
+var 자료 = {
+    name: 'choco',
+};
+자료.name;
+function 내함수(a) { }
+내함수('choco');
