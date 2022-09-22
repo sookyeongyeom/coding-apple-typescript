@@ -62,10 +62,10 @@ let project: { member: string[]; days: number; started: boolean } = {
 let 유니온타입: string | number = 123;
 유니온타입 = '스트링가능';
 
-let 유니온배열: (number | string)[] = [1, 2, 3];
-let 이렇게도됨: number[] | string[] = [1, 2, 3];
-유니온배열 = ['가', '나', '다'];
-이렇게도됨 = ['가', '나', '다'];
+let 유니온배열: (number | string)[] = [1, 2, 3]; // 숫자나 스트링을 포함한 배열
+// let 이거안됨: number[] | string[] = [1, 2, 3]; // 이건 다른 의미임 = 숫자배열이거나 스트링배열
+유니온배열 = ['가', '나', 1];
+// 이거안됨 = ['가', '나', 1]; // 에러남
 
 let 유니온오브젝트: { a: number | string } = { a: 123 };
 유니온오브젝트 = { a: '가나다' };
@@ -179,3 +179,75 @@ function 문제3(월소득: number, 집보유여부: boolean, 매력점수: stri
 
 console.log(문제3(700, false, '중'));
 console.log(문제3(-100, false, '상'));
+
+/* ************************************************************** */
+
+function 유니온타입다룰땐내로잉(x: number | string) {
+	if (typeof x === 'string') return x + '1';
+	else return x + 1;
+}
+
+유니온타입다룰땐내로잉(123);
+
+function 배열요소내로잉(x: number | string) {
+	let array: number[] = [];
+	if (typeof x === 'number') array[0] = x;
+}
+
+배열요소내로잉(123);
+
+// 내로잉할때 if문 썼으면 끝까지 써야 안전
+// else, else if 안쓰면 에러로 잡아줄 수도 있음
+
+// 내로잉 판정 문법들
+// typeof 변수
+// 속성명 in 오브젝트자료
+// 인스턴스 instanceof 부모
+
+// 내로잉 귀찮으면 assertion = 타입 덮어쓰기
+
+function 어설션(x: number | string) {
+	let array: number[] = [];
+	array[0] = x as number; // 왼쪽에 있는 변수를 number로 덮어써주세요
+}
+
+// 빠따 안맞기 위한 assertion 문법의 용도
+// 1. narrowing 할 때 씁니다 (유니온 타입을 하나로 확정지을 때 씀)
+// 2. 무슨 타입이 들어올지 100% 확실할 때 씁니다 (다른 타입이 들어와도 버그 캐치를 못함)
+// 버그 추적을 못하므로 웬만하면 쓰지말고, 남이 짠 코드 수정하는데 왜 타입에러가 나는지 모르겠을 때 쓰셈 (디버깅용, 비상용)
+
+// 옛날 as 문법
+// <number>x
+// 리액트의 jsx태그와 헷갈려서 요즘은 거의 as키워드를 사용
+
+// Q. 근데 내함수('123') 이렇게 숫자말고 문자를 입력하면 어떻게 돼요?
+// A. '1231' 이렇게 출력될거요. as는 그냥 주장만 하는거지 ***실제로 타입을 바꿔주는건 아니기 때문***입니다
+
+// 문제1. 배열 내부 문자타입의 숫자를 숫자로 변환해주는 클리닝함수
+function cleaning(dirty: (string | number)[]): number[] {
+	let clean: number[] = [];
+	dirty.map((v, i) => {
+		clean.push(Number(v));
+	});
+	return clean;
+}
+
+console.log(cleaning(['1', 2, '3']));
+
+// 문제2. 선생님 오브젝트자료를 집어넣으면 그 선생님이 가르치는 과목중 맨뒤 1개를 리턴해주는 함수
+let 철수쌤 = { subject: 'math' };
+let 영희쌤 = { subject: ['science', 'english'] };
+let 민수쌤 = { subject: ['science', 'art', 'korean'] };
+
+function 마지막과목(teacher: { subject: string | string[] }): string {
+	if (typeof teacher.subject == 'string') return teacher.subject;
+	else if (Array.isArray(teacher.subject)) return teacher.subject.slice(-1)[0];
+	else return '업쪄'; // ***여기 else문 없으면 리턴값이 없을 수 있기 때문에 에러남***
+}
+
+console.log(마지막과목(철수쌤));
+console.log(마지막과목(영희쌤));
+console.log(마지막과목(민수쌤));
+
+// 배열인지 확인할때는 typeof 못씀 (프리미티브 아니기때문)
+// 대신 Array.isArray() 사용해야함

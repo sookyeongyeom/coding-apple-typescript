@@ -39,9 +39,7 @@ var project = {
 var 유니온타입 = 123;
 유니온타입 = '스트링가능';
 var 유니온배열 = [1, 2, 3];
-var 이렇게도됨 = [1, 2, 3];
-유니온배열 = ['가', '나', '다'];
-이렇게도됨 = ['가', '나', '다'];
+유니온배열 = ['가', '나', 1];
 var 유니온오브젝트 = { a: 123 };
 유니온오브젝트 = { a: '가나다' };
 var 애니;
@@ -113,3 +111,42 @@ function 문제3(월소득, 집보유여부, 매력점수) {
 }
 console.log(문제3(700, false, '중'));
 console.log(문제3(-100, false, '상'));
+function 유니온타입다룰땐내로잉(x) {
+    if (typeof x === 'string')
+        return x + '1';
+    else
+        return x + 1;
+}
+유니온타입다룰땐내로잉(123);
+function 배열요소내로잉(x) {
+    var array = [];
+    if (typeof x === 'number')
+        array[0] = x;
+}
+배열요소내로잉(123);
+function 어설션(x) {
+    var array = [];
+    array[0] = x;
+}
+function cleaning(dirty) {
+    var clean = [];
+    dirty.map(function (v, i) {
+        clean.push(Number(v));
+    });
+    return clean;
+}
+console.log(cleaning(['1', 2, '3']));
+var 철수쌤 = { subject: 'math' };
+var 영희쌤 = { subject: ['science', 'english'] };
+var 민수쌤 = { subject: ['science', 'art', 'korean'] };
+function 마지막과목(teacher) {
+    if (typeof teacher.subject == 'string')
+        return teacher.subject;
+    else if (Array.isArray(teacher.subject))
+        return teacher.subject.slice(-1)[0];
+    else
+        return '업쪄';
+}
+console.log(마지막과목(철수쌤));
+console.log(마지막과목(영희쌤));
+console.log(마지막과목(민수쌤));
