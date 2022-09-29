@@ -250,4 +250,57 @@ let 누누 = new Hero('consume');
 console.log(누누);
 let 어레이 = [4, 2, 1];
 let 어레이2 = new Array(4, 2, 1);
-Array.prototype.함수 = ㄹ;
+class PersonClass {
+    constructor(name) {
+        this.name = name;
+    }
+    함수(a) {
+        console.log(`안녕 ${a}!`);
+    }
+}
+let 사람1 = new PersonClass('choco');
+let 사람2 = new PersonClass('gom');
+console.log(사람1.name);
+console.log(사람2.name);
+사람1.함수('정아');
+class Car {
+    constructor(model, price) {
+        this.model = model;
+        this.price = price;
+    }
+    tax() {
+        return this.price / 10;
+    }
+}
+let car1 = new Car('소나타', 3000);
+console.log(car1);
+console.log(car1.tax());
+class Word {
+    constructor(...rest) {
+        const numParam = [];
+        const strParam = [];
+        rest.forEach((v) => {
+            if (typeof v === 'number')
+                numParam.push(v);
+            else
+                strParam.push(v);
+        });
+        this.num = [...numParam];
+        this.str = [...strParam];
+    }
+}
+let 오브제 = new Word('choco', 25, 26, 'gom', 'ponyo', 22);
+console.log(오브제.num);
+console.log(오브제.str);
+let 네모 = { color: 'pink', width: 100 };
+let 학생 = { name: 'choco' };
+let 선생 = { name: 'gom', age: 26 };
+let 상품 = { brand: 'Samsung', serialNumber: 1360, model: ['TV', 'phone'] };
+let 장바구니 = [
+    { product: '청소기', price: 7000 },
+    { product: '삼다수', price: 800 },
+];
+let functions = {
+    plus: (a, b) => a + b,
+    minus: (a, b) => a - b,
+};

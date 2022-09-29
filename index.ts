@@ -37,7 +37,7 @@ let 타입지정자동으로해주나요 = true;
 let 나는숫자배열이다 = [1, 2, 3];
 let 나중에지정도가능;
 나중에지정도가능 = 1;
-나중에지정도가능 = [1, 2, 3]; // 왜 any 안막아주냐
+나중에지정도가능 = [1, 2, 3];
 
 // 문제1. 이름, 나이, 출생지역
 let 내이름: string = '수경';
@@ -95,7 +95,7 @@ let 문제있음: string | number;
 // 문제있음 + 1; // 에러남
 
 let 이러면문제없음: string | number = 0;
-이러면문제없음 + 1; // 에러남
+이러면문제없음 + 1;
 
 let 언노운은연산불가: unknown = 1;
 // 언노운은연산불가 - 1; // 에러남
@@ -506,3 +506,135 @@ let 어레이2 = new Array(4, 2, 1); // 컴퓨터의 방식
 
 // Q. 모든 array 자료에서 쓸 수 있는 함수 추가도 가능
 // Array.prototype.함수 = function () {};
+
+/* ************************************************************** */
+
+class PersonClass {
+	// TS에서는 필드값이 미리 있어야 this.어쩌구 지정 가능
+	// JS에서는 없어도 알아서 해줌
+	name: string;
+	constructor(name: string) {
+		this.name = name;
+	}
+	// 이 함수는 PersonClass의 prototype에 추가됨
+	함수(a: string) {
+		console.log(`안녕 ${a}!`);
+	}
+}
+
+let 사람1 = new PersonClass('choco');
+let 사람2 = new PersonClass('gom');
+console.log(사람1.name);
+console.log(사람2.name);
+사람1.함수('정아');
+
+// 문제1. Car 클래스
+class Car {
+	model: string;
+	price: number;
+	constructor(model: string, price: number) {
+		this.model = model;
+		this.price = price;
+	}
+	tax(): number {
+		return this.price / 10;
+	}
+}
+
+let car1 = new Car('소나타', 3000);
+console.log(car1);
+console.log(car1.tax());
+
+// 문제2. Word 클래스
+class Word {
+	num: number[];
+	str: string[];
+	constructor(...rest: (string | number)[]) {
+		const numParam: number[] = [];
+		const strParam: string[] = [];
+		rest.forEach((v) => {
+			if (typeof v === 'number') numParam.push(v);
+			else strParam.push(v);
+		});
+		this.num = [...numParam];
+		this.str = [...strParam];
+	}
+}
+
+let 오브제 = new Word('choco', 25, 26, 'gom', 'ponyo', 22);
+console.log(오브제.num);
+console.log(오브제.str);
+
+/* ************************************************************** */
+
+// type Square = { color: string; width: number };
+interface Square {
+	color: string;
+	width: number;
+}
+
+let 네모: Square = { color: 'pink', width: 100 };
+
+// type 대비 interface의 장점 : extends로 복사하여 확장가능
+interface Student {
+	name: string;
+}
+
+interface Teacher extends Student {
+	age: number;
+}
+
+let 학생: Student = { name: 'choco' };
+let 선생: Teacher = { name: 'gom', age: 26 };
+
+// type에서는 & 기호가 유사한 기능 제공 (intersection type)
+// extends랑은 약간 다름
+// 복사해서 확장하겠다는 의미가 아니라, 두 타입을 전부 만족하는 타입이라는 뜻
+type 동물 = { name: string };
+type 고양이 = { age: number } & 동물;
+
+// type vs interface
+// 1. interface는 중복선언 가능 (자동으로 합쳐짐 = 자동 extend)
+// 2. type은 중복선언 불가능
+// 타입은 엄격하고 인터페이스는 유연하다
+// 다른 사람이 이용 많이할 것 같은 라이브러리의 경우 interface를 써서 확장가능하게 한다
+interface Student {} // 정상
+// type 동물 // 에러남
+
+// interface는 extends 쓸 때 중복속성 발생하면? 미리 에러로 잡아줘서 안전!
+// type의 & 기호는 중복속성이 발생하면 사용하는 시점에 never 타입에러남
+
+// 문제1. interface 이용해서 type을 만들어보자
+interface Product {
+	brand: string;
+	serialNumber: number;
+	model: string[];
+}
+
+let 상품: Product = { brand: 'Samsung', serialNumber: 1360, model: ['TV', 'phone'] };
+
+// 문제2. array안에 object 여러개가 필요한 상황
+interface Item {
+	product: string;
+	price: number;
+}
+
+let 장바구니: Item[] = [
+	{ product: '청소기', price: 7000 },
+	{ product: '삼다수', price: 800 },
+];
+
+// 문제3. 위에서 만든 타입을 extends 해보자
+interface NewItem extends Item {
+	card: boolean;
+}
+
+// 문제4. object 안에 함수를 2개 넣고 싶은 경우
+interface CalcFunctions {
+	[keys: string]: (a: number, b: number) => number;
+}
+
+let functions: CalcFunctions = {
+	plus: (a: number, b: number) => a + b,
+	minus: (a: number, b: number) => a - b,
+};
